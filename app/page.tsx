@@ -21,11 +21,6 @@ const DEFAULT_CHAPTER_HASH = "#ch16";
 
 const parts: Part[] = [
   {
-    title: "卷首",
-    en: "Front Matter",
-    chapters: [{ num: "0", title: "卷首：怎么读这本书" }],
-  },
-  {
     title: "第一卷 · 格局重置",
     en: "Part I · The Reset",
     chapters: [
@@ -112,10 +107,6 @@ const parts: Part[] = [
 ];
 
 function chapterHash(num: string) {
-  if (num === "0") {
-    return "#home";
-  }
-
   return `#ch${num.padStart(2, "0")}`;
 }
 
@@ -123,7 +114,7 @@ function getChapterFromHash(hash: string) {
   return (
     chapterContentByHash.get(hash) ??
     chapterContentByHash.get(DEFAULT_CHAPTER_HASH) ??
-    chapterContents[16]
+    chapterContents[0]
   );
 }
 
@@ -284,7 +275,12 @@ export default function Home() {
 
       if (hash === "#checklist" || hash === "#self-test") {
         setActiveSectionHash(hash);
+        return;
       }
+
+      setActiveChapterHash(DEFAULT_CHAPTER_HASH);
+      setActiveSectionHash("#checklist");
+      window.history.replaceState(null, "", DEFAULT_CHAPTER_HASH);
     };
 
     syncHash();
@@ -322,7 +318,11 @@ export default function Home() {
         >
           ☰
         </button>
-        <a className="brand" href="#home" onClick={(event) => navigateToHash("#home", event)}>
+        <a
+          className="brand"
+          href={DEFAULT_CHAPTER_HASH}
+          onClick={(event) => navigateToHash(DEFAULT_CHAPTER_HASH, event)}
+        >
           <span className="brand-mark">Agentic SDE</span>
           <span className="brand-sub">软件工程手册</span>
         </a>

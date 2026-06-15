@@ -9,14 +9,6 @@ export type ChapterContent = {
 
 export const chapterContents = [
   {
-    "id": 0,
-    "hash": "#home",
-    "title": "卷首：怎么读这本书",
-    "kicker": "",
-    "checklist": [],
-    "selfTest": []
-  },
-  {
     "id": 1,
     "hash": "#ch01",
     "title": "代码不再是中心产物",
