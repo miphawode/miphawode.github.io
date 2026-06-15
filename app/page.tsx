@@ -99,11 +99,6 @@ const parts: Part[] = [
       { num: "31", title: "Capstone：为真实 repo 设计 agentic SDE harness" },
     ],
   },
-  {
-    title: "第九卷 · 模板附录",
-    en: "Part IX · Template Appendix",
-    chapters: [{ num: "32", title: "工程模板合集" }],
-  },
 ];
 
 function chapterHash(num: string) {
