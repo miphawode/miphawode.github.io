@@ -358,7 +358,7 @@ p {
 
 .editor-page {
   min-height: calc(100vh - 60px);
-  background: linear-gradient(90deg, var(--paper-2) 0 50%, var(--paper) 50%);
+  background: var(--paper);
   font-family: var(--sans);
 }
 
@@ -372,6 +372,7 @@ p {
   min-width: 0;
   padding: 28px;
   border-right: 1px solid var(--line-soft);
+  background: var(--paper);
 }
 
 .editor-toolbar {
@@ -662,7 +663,7 @@ p {
     padding: 22px 20px;
     border-right: 0;
     border-bottom: 1px solid var(--line-soft);
-    background: var(--paper-2);
+    background: var(--paper);
   }
 
   .editor-preview {
