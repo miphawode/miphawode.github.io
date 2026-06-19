@@ -1,6 +1,7 @@
 "use client";
 
 import { type MouseEvent, useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import {
   chapterContentByHash,
   chapterContents,
@@ -9,6 +10,7 @@ import {
 type Chapter = {
   num: string;
   title: string;
+  href?: string;
 };
 
 type Part = {
@@ -99,6 +101,11 @@ const parts: Part[] = [
       { num: "31", title: "Capstone：为真实 repo 设计 agentic SDE harness" },
     ],
   },
+  {
+    title: "项目笔记",
+    en: "Project Notes",
+    chapters: [{ num: "Git", title: "Git 功能笔记", href: "/editor" }],
+  },
 ];
 
 function chapterHash(num: string) {
@@ -131,19 +138,26 @@ function Sidebar({
             <span className="part-en">{part.en}</span>
           </div>
           {part.chapters.map((chapter) => {
-            const href = chapterHash(chapter.num);
+            const href = chapter.href ?? chapterHash(chapter.num);
             const isActive = href === activeChapterHash;
 
             return (
               <div key={chapter.num}>
-                <a
-                  className={`toc-link ${isActive ? "active" : ""}`}
-                  href={href}
-                  onClick={(event) => onNavigate(href, event)}
-                >
-                  <span className="chapter-num">{chapter.num}</span>
-                  <span className="chapter-title">{chapter.title}</span>
-                </a>
+                {chapter.href ? (
+                  <Link className="toc-link" href={chapter.href}>
+                    <span className="chapter-num">{chapter.num}</span>
+                    <span className="chapter-title">{chapter.title}</span>
+                  </Link>
+                ) : (
+                  <a
+                    className={`toc-link ${isActive ? "active" : ""}`}
+                    href={href}
+                    onClick={(event) => onNavigate(href, event)}
+                  >
+                    <span className="chapter-num">{chapter.num}</span>
+                    <span className="chapter-title">{chapter.title}</span>
+                  </a>
+                )}
 
                 {isActive ? (
                   <div className="toc-children">
@@ -322,6 +336,9 @@ export default function Home() {
           <span className="brand-sub">软件工程手册</span>
         </a>
         <div className="topbar-spacer" />
+        <Link className="topbar-link" href="/editor">
+          Git 笔记
+        </Link>
         <button className="search-button" type="button" aria-label="搜索">
           <span>⌕</span>
           <span className="search-key">/</span>
